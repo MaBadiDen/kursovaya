@@ -32,14 +32,25 @@ public class Main {
     }
     public static int getSummOfSalaryes() {
         int summ = 0;
+        int i = 0;
         for (Employee employee : employees) {
-            summ = summ + employee.getSalary();
+            if(employees[i] != null) {
+                summ = summ + employee.getSalary();
+            }
+            i++;
         }
         return summ;
     }
     public static int getMostUnderpaidEmployee(){
-        int min = employees[0].getSalary();
-        int minId = 1;
+        int min = 0;
+        int minId = 0;
+        for (int i = 0; i < employees.length; i++) {
+            if(employees[i] != null){
+                min = employees[i].getSalary();
+                minId = i;
+                break;
+            }
+        }
         for(int i = 1; i < employees.length; i++) {
             if(min > employees[i].getSalary())
             {
@@ -50,8 +61,17 @@ public class Main {
         return minId;
     }
     public static int getMostWellPayedEmployee(){
-        int max = employees[0].getSalary();
-        int maxId = 1;
+        int max = 0;
+        int maxId = 0;
+
+        for(int i = 0; i < employees.length; i++) {
+            if(employees[i] != null){
+                max = employees[i].getSalary();
+                maxId = i;
+                break;
+            }
+        }
+
         for(int i = 1; i < employees.length; i++) {
             if(max < employees[i].getSalary())
             {
@@ -63,7 +83,13 @@ public class Main {
     }
 
     public static double getAverageSalary(int summ) {
-        return (double)summ/employees.length;
+        int counter = 0;
+        for (Employee employee : employees) {
+            if (employee != null) {
+                counter++;
+            }
+        }
+        return (double)summ/counter;
     }
     public static void printNames() {
         for (Employee employee : employees) {
